@@ -34,14 +34,19 @@ public class BinaryTree {
 	
 	
 	public void print(int depth) {
+		System.out.print("--");
+		System.out.print(value);
 		if(left != null){
 			left.print(depth + 1);
 		}
-		for(int i = 0 ; i < depth ; i++){
-			System.out.print(" ");
-		}
-		System.out.println(value);
+		
+		
 		if(right != null) {
+			System.out.println();
+			for(int i = 0 ; i <= depth ; i++){
+				System.out.print("   ");
+			}
+			
 			right.print(depth + 1);
 		}
 	}
