@@ -16,4 +16,8 @@ public class Node {
 		edges.add(tmp);
 		n.edges.add(tmp);
 	}
+	
+	public void print(){
+		//Impement
+	}
 }
