@@ -10,4 +10,11 @@ public class Edge {
 		node1 = a;
 		node2 = b;
 	}
+	
+	public Node getOtherNode(Node t){
+		if(t == node1) {
+			return node2;
+		}
+		return node1;
+	}
 }

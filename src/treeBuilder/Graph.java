@@ -10,6 +10,9 @@ public class Graph {
 	}
 	
 	public void print(){
-		nodes.get(0).print();
+		nodes.get(0).print(0);
+		for(Node n : nodes){
+			n.visted = true;
+		}
 	}
 }
