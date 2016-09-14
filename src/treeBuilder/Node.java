@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Node {
 	int value;
 	boolean visted = false;
+	double distance;
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	
 	
@@ -31,17 +32,17 @@ public class Node {
 			visted = true;
 			System.out.print(" - ");
 			System.out.print(value);
-			if(edges.size() != 0){
-				edges.get(0).getOtherNode(this).print(depth + 1);
-			}
-			if(edges.size() > 1){
-				ArrayList<Integer> goodValues = new ArrayList<Integer>(); 
-				for(int i  = 1 ; i < edges.size() ; i++) {
-					if(edges.get(i).getOtherNode(this).visted == false) {
-						goodValues.add(i);
-					}
+			ArrayList<Integer> goodValues = new ArrayList<Integer>(); 
+			for(int i  = 0 ; i < edges.size() ; i++) {
+				if(edges.get(i).getOtherNode(this).visted == false) {
+					goodValues.add(i);
 				}
-				for(int i  = 0 ; i < goodValues.size() ; i++) {
+			}
+			if(goodValues.size() != 0){
+				edges.get(goodValues.get(0)).getOtherNode(this).print(depth + 1);
+			}
+			if(goodValues.size() > 1) {
+				for(int i  = 1 ; i < goodValues.size() ; i++) {
 					System.out.println();
 					for(int j = -1 ; j < depth ; j += 1) {
 						System.out.print("    ");

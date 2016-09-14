@@ -3,16 +3,21 @@ package treeBuilder;
 import java.util.ArrayList;
 
 public class Graph {
-	ArrayList<Node> nodes = new ArrayList<Node>();
+	public static ArrayList<Node> allNodes = new ArrayList<Node>();
 	
-	public Graph(ArrayList<Node> nodes) {
-		this.nodes = nodes;
-	}
-	
-	public void print(){
-		nodes.get(0).print(0);
-		for(Node n : nodes){
+	public static void print(){
+		allNodes.get(0).print(0);
+		for(Node n : allNodes){
 			n.visted = true;
 		}
+	}
+	
+	public static void dijkstraSetUp() {
+		for(Node n : allNodes){
+			n.visted = true;
+			n.distance = 1.0 / 0.0;
+		}
+		allNodes.get(0).distance = 0;
+		//allNodes.get(0).dijkstra();
 	}
 }
