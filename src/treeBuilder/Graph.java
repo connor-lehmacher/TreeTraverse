@@ -12,12 +12,34 @@ public class Graph {
 		}
 	}
 	
-	public static void dijkstraSetUp() {
+	public static void dijkstra() {
+		ArrayList<Node> finished = new ArrayList<Node>();
+		ArrayList<Node> processing = new ArrayList<Node>();
 		for(Node n : allNodes){
-			n.visted = true;
+			n.visted = false;
 			n.distance = 1.0 / 0.0;
 		}
-		allNodes.get(0).distance = 0;
-		//allNodes.get(0).dijkstra();
+		final Node baseNode = allNodes.get(0);
+		baseNode.distance = 0;
+		baseNode.level = 0;
+		processing.add(baseNode);
+		while (processing.size() > 0) {
+			final Node evaluationNode = closestNode(processing);
+			processing.remove(evaluationNode);
+			//http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
+		}
+		
+	}
+	
+	public static Node closestNode(ArrayList<Node> group) {
+		double tmpdist = Double.POSITIVE_INFINITY;
+		int tmpcall = 0;
+		for(int i = 0 ; i < group.size() ; i++){
+			if(group.get(i).distance <= tmpdist){
+				tmpdist = group.get(i).distance;
+				tmpcall = i;
+			}
+		}
+		return group.get(tmpcall);
 	}
 }

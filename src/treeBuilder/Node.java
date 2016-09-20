@@ -6,6 +6,7 @@ public class Node {
 	int value;
 	boolean visted = false;
 	double distance;
+	int level;
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	
 	
@@ -25,6 +26,16 @@ public class Node {
 	
 	public void c(int n) {
 		c(new Node(n));
+	}
+	
+	public void dijkstra(Edge origin) {
+		if(visted == false) {
+			distance = origin.getOtherNode(this).distance + origin.length;
+			visted = true;
+			for(Edge e : edges){
+				dijkstra(e);
+			}
+		}
 	}
 	
 	public void print(int depth) {
