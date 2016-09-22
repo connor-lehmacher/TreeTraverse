@@ -20,11 +20,25 @@ public class Main {
 		b.c(d);
 		a.c(c);
 		c.c(d);
+		e.c(d);
+		f.c(e);
+		a.c(f);
+		h.c(f);
+		i.c(h);
+		i.c(d);
+		j.c(i);
+		k.c(c);
+		l.c(k);
+		l.c(j);
+		j.c(m);
+		g.c(m);
+		g.c(a);
+		
+		
 		
 		Graph.dijkstra();
-		System.out.println(a.distance + " " +
-				b.distance + " " +
-				c.distance + " " +
-				d.distance);
+		for(Node n : Graph.allNodes) {
+			System.out.println(n.distance);
+		}
 	}
 }
