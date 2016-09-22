@@ -12,6 +12,11 @@ public class Node {
 	
 	public Node(int v){
 		value = v;
+		Graph.allNodes.add(this);
+	}
+	
+	public Node() {
+		this(1);
 	}
 	
 	public void connect(Node n, int length) {
