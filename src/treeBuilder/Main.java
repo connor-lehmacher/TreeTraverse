@@ -1,5 +1,7 @@
 package treeBuilder;
 
+import quickSort.QuickSort;
+
 public class Main {
 	public static void main(String[] args) {
 		Node a = new Node();
@@ -40,5 +42,9 @@ public class Main {
 		for(Node n : Graph.allNodes) {
 			System.out.println(n.distance);
 		}
+		
+		Graph.print();
+		
+		QuickSort.run();
 	}
 }
