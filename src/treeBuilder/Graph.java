@@ -26,7 +26,8 @@ public class Graph {
 		while (processing.size() > 0) {
 			final Node evaluationNode = closestNode(processing);
 			processing.remove(evaluationNode);
-			//http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
+			finished.add(evaluationNode);
+			processing = evaluationNode.evaluateNeighboors(processing);
 		}
 		
 	}

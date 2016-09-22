@@ -28,14 +28,17 @@ public class Node {
 		c(new Node(n));
 	}
 	
-	public void dijkstra(Edge origin) {
-		if(visted == false) {
-			distance = origin.getOtherNode(this).distance + origin.length;
-			visted = true;
-			for(Edge e : edges){
-				dijkstra(e);
+	public ArrayList<Node> evaluateNeighboors(ArrayList<Node> processing) {
+		for(Edge e : edges) {
+			if(!e.getOtherNode(this).visted) {
+				double newDistance = e.length + distance;
+				if(newDistance < e.getOtherNode(this).distance) {
+					e.getOtherNode(this).distance = newDistance;
+					processing.add(e.getOtherNode(this));
+				}
 			}
 		}
+		return processing;
 	}
 	
 	public void print(int depth) {
