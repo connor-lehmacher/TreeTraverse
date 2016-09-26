@@ -34,7 +34,6 @@ public class Main {
 		l.c(j);
 		j.c(m);
 		g.c(m);
-		g.c(a);
 		
 		
 		
