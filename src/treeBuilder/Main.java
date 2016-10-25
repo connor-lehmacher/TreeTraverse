@@ -1,10 +1,10 @@
 package treeBuilder;
 
-import quickSort.QuickSort;
+import main.Main1;
 
 public class Main {
 	public static void main(String[] args) {
-		Node a = new Node();
+		/* Node a = new Node();
 		Node b = new Node();
 		Node c = new Node();
 		Node d = new Node();
@@ -44,6 +44,9 @@ public class Main {
 		
 		Graph.print();
 		
-		QuickSort.run();
+	objects	QuickSort.run();
+	*/
+		System.out.println("Test");
+		Main1.run();
 	}
 }
