@@ -1,7 +1,5 @@
 package treeBuilder;
 
-import main.Main1;
-
 public class Main {
 	public static void main(String[] args) {
 		/* Node a = new Node();
@@ -46,6 +44,7 @@ public class Main {
 		
 	objects	QuickSort.run()
 	*/
-		Main1.run();
+		//Main1.run();
+		rockpaperscissors.RockPaperScissors.run();
 	}
 }
