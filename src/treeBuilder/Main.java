@@ -44,9 +44,8 @@ public class Main {
 		
 		Graph.print();
 		
-	objects	QuickSort.run();
+	objects	QuickSort.run()
 	*/
-		System.out.println("Test");
 		Main1.run();
 	}
 }

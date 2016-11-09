@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.math.BigInteger;
 
 import javax.swing.JFrame;
 
@@ -71,39 +72,22 @@ public class Window extends JFrame {
         k = new KeyBoard();
         addKeyListener(k);
         
-        ArrayList<Boolean> dc = new ArrayList<Boolean>();        
-        dc.add(true);
-        //true = right, false = left
-        
-        ArrayList<Boolean> pc = new ArrayList<Boolean>();
-        
-        while(dc.size() < 200000) {
-        	pc.clear();
-        	for(int i = dc.size() - 1 ; i >= 0 ; i--) {
-        		pc.add(!dc.get(i));
+        final int size = 700;
+        for(double i = 0; i < 1 ; i += (1.0 / (double)size)){
+        	for(double j = 0 ; j <= i ; j += (1.0 / (double)size)){
+        		long bi = (long)(size * i + 0.01);
+        		long bj = (long)(size * j + 0.01);
+        		//System.out.println(Util.binomial(bi, bj));
+        		if(Util.binomial(new BigInteger(((Long)bi).toString()),
+        				new BigInteger(((Long)bj).toString()))
+        				.mod(new BigInteger("2")).equals(BigInteger.ONE)) {
+        			new Square(Vector.createFromRect(j+(1-i)/2, i), (1.0 /(double)size));
+        		}
         	}
-        	dc.add(true);
-        	dc.addAll(pc);
         }
         
-        final double size = 0.0015;
-        
-        System.out.println(dc);
-        Vector l = Vector.createFromRect(0.5, 0.5);
-        new Square(l , size);
-        Vector v = Vector.createFromRect(size * 0.85, 0);
-        for(int i = 0 ; i < dc.size() ; i++) {
-        	if(dc.get(i)) {
-        		v = v.rotateBy(Math.PI / 2);
-        	} else {
-        		v = v.rotateBy(-Math.PI / 2);
-        	}
-        	l = l.addWith(v);
-        	new Square(l , size);
-        }
-
-    }
-    
+    } 
+   
     //-----Methods--------//
     /** Logic loop */
     public void run() {
@@ -139,7 +123,7 @@ public class Window extends JFrame {
     	final int size = squares.size();
     	double hueConv = 360 / ((double) size);
     	for(i = 0; i < size ; i++) {
-    		g.setColor(hueToColor(hueConv * 10 * i));
+    		g.setColor(hueToColor(hueConv * i));
     		squares.get(i).draw(g, this);
     	}
         repaint();
