@@ -46,7 +46,7 @@ public class Main {
 		
 	objects	QuickSort.run()
 	*/
-//		Main1.run();
+		Main1.run();
 //		rockpaperscissors.RockPaperScissors.run();
 	}
 }
