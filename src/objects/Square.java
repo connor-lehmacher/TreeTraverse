@@ -15,6 +15,7 @@ public class Square {
 		Window.squares.add(this);
 	}
 	
+	
 	public void draw(Graphics g, Window w) {
 		int realX =  (int)(w.getFrameX() * location.x + Window.PADDING_X);
         int realY =  (int)(w.getFrameY() * location.y + Window.PADDING_Y);
