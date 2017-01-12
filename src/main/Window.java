@@ -26,7 +26,10 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static ArrayList<Square> squares = new ArrayList<Square>();
+    public static int size = 100;
+    public static Square[][] squares = new Square[size][size];
+    public static int sx = 0;
+    public static int sy = 0;
     //Gives Values for padding based on OS
     static {
     	if (System.getProperty("os.name").equals("Mac OS X")) {
@@ -72,20 +75,9 @@ public class Window extends JFrame {
         k = new KeyBoard();
         addKeyListener(k);
         
-        final int size = 700;
-        for(double i = 0; i < 1 ; i += (1.0 / (double)size)){
-        	for(double j = 0 ; j <= i ; j += (1.0 / (double)size)){
-        		long bi = (long)(size * i + 0.01);
-        		long bj = (long)(size * j + 0.01);
-        		//System.out.println(Util.binomial(bi, bj));
-        		if(Util.binomial(new BigInteger(((Long)bi).toString()),
-        				new BigInteger(((Long)bj).toString()))
-        				.mod(new BigInteger("2")).equals(BigInteger.ONE)) {
-        			new Square(Vector.createFromRect(j+(1-i)/2, i), (1.0 /(double)size));
-        		}
-        	}
+        for(int i = 0; i < Window.size * Window.size; i++) {
+        	new Square();
         }
-        
     } 
    
     //-----Methods--------//
@@ -119,13 +111,15 @@ public class Window extends JFrame {
     /** paint loop
      * draws rectangles/people */
     public void paintComponent(Graphics g) {   
-    	int i;
-    	final int size = squares.size();
-    	double hueConv = 360 / ((double) size);
-    	for(i = 0; i < size ; i++) {
-    		g.setColor(hueToColor(hueConv * i));
-    		squares.get(i).draw(g, this);
-    	}
+    	g.setColor(Color.WHITE);
+        for(int i = 0; i < Window.size; i++) {
+        	for(int j = 0; j < Window.size; j++) {
+        		System.out.println(i + " " + j);
+        		if(squares[i][j].l) {
+        			squares[i][j].draw(g, this);
+        		}
+        	}
+        }
         repaint();
     }
     

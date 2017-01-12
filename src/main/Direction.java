@@ -1,7 +1,7 @@
 package main;
 
 public enum Direction {
-	Up, Down, Left, Right;
+	Up, Down, Left, Right, None;
 	
 	public Direction rotate() {
 		if(this == Up) {

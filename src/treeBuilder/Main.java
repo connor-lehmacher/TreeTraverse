@@ -1,7 +1,6 @@
 package treeBuilder;
 
 import main.Main1;
-import mergeSort.MergeSort;
 
 public class Main {
 	public static void main(String[] args) {
@@ -47,8 +46,8 @@ public class Main {
 		
 	objects	QuickSort.run()
 	*/
-//		Main1.run();
-		MergeSort.run();
+		Main1.run();
+//		GnomeSort.run();
 //		rockpaperscissors.RockPaperScissors.run();
 	}
 }
