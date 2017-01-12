@@ -11,7 +11,7 @@ public class Square {
 	public boolean l;
 	
 	public Square() {
-		l = true;
+		l = false;
 		x = Window.sx;
 		y = Window.sy;
 		Window.squares[Window.sx][Window.sy] = this;
@@ -24,7 +24,20 @@ public class Square {
 	}
 	
 	public Square neighboor(int x,int y){
-		return Window.squares[this.x + x][this.y + y]; 
+		return Window.squares[(this.x + x + Window.size) % Window.size][(this.y + y + Window.size) % Window.size]; 
+	}
+	
+	public int neighboors() {
+		int i = 0;
+		i+= (neighboor(1,1).l ? 1 : 0);
+		i+= (neighboor(0,1).l ? 1 : 0);
+		i+= (neighboor(1,0).l ? 1 : 0);
+		i+= (neighboor(-1,1).l ? 1 : 0);
+		i+= (neighboor(1,-1).l ? 1 : 0);
+		i+= (neighboor(-1,-1).l ? 1 : 0);
+		i+= (neighboor(0,-1).l ? 1 : 0);
+		i+= (neighboor(-1,0).l ? 1 : 0);
+		return i;
 	}
 	
 	

@@ -28,6 +28,7 @@ public class Window extends JFrame {
     
     public static int size = 100;
     public static Square[][] squares = new Square[size][size];
+    public static boolean[][] changes = new boolean[size][size];
     public static int sx = 0;
     public static int sy = 0;
     //Gives Values for padding based on OS
@@ -78,6 +79,11 @@ public class Window extends JFrame {
         for(int i = 0; i < Window.size * Window.size; i++) {
         	new Square();
         }
+        squares[0][1].l = true;
+        squares[1][1].l = true;
+        squares[1][0].l = true;
+        squares[0][0].l = true;
+        squares[5][5].l= true;
     } 
    
     //-----Methods--------//
@@ -86,6 +92,27 @@ public class Window extends JFrame {
     	while(true) {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
+    		for(int i = 0; i < Window.size; i++) {
+    			for(int j = 0; j < Window.size; j++) {
+    				Square x = squares[i][j];
+    				if(x.l){
+    					if(x.neighboors() != 2 || x.neighboors() != 3) {
+    						changes[i][j] = true;
+    						System.out.println(x.neighboors());
+    						System.out.println("Hi");
+    					}
+    				} else{
+    					if(x.neighboors() == 3) {
+    						changes[i][j] = true;
+    					System.out.println("Hello");
+    					}
+    				}
+    			}
+    		}
+    		//Run Changes
+    		try{
+    			Thread.sleep(1000);
+    		} catch(InterruptedException i){}
     	}
     }
     
@@ -114,7 +141,7 @@ public class Window extends JFrame {
     	g.setColor(Color.WHITE);
         for(int i = 0; i < Window.size; i++) {
         	for(int j = 0; j < Window.size; j++) {
-        		System.out.println(i + " " + j);
+        		g.setColor(hueToColor(Math.sin((double)i/100.0)*j*3.600));
         		if(squares[i][j].l) {
         			squares[i][j].draw(g, this);
         		}
