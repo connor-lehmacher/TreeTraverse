@@ -79,11 +79,11 @@ public class Window extends JFrame {
         for(int i = 0; i < Window.size * Window.size; i++) {
         	new Square();
         }
-        squares[0][1].l = true;
-        squares[1][1].l = true;
-        squares[1][0].l = true;
-        squares[0][0].l = true;
-        squares[5][5].l= true;
+        squares[10][11].l = true;
+        squares[11][11].l = true;
+        squares[11][10].l = true;
+        squares[11][12].l = true;
+        squares[12][10].l = true;
     } 
    
     //-----Methods--------//
@@ -92,27 +92,33 @@ public class Window extends JFrame {
     	while(true) {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
+    		try{
+    			Thread.sleep(100);
+    		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
     				Square x = squares[i][j];
     				if(x.l){
-    					if(x.neighboors() != 2 || x.neighboors() != 3) {
+    					if(x.neighboors() != 2 && x.neighboors() != 3) {
     						changes[i][j] = true;
-    						System.out.println(x.neighboors());
-    						System.out.println("Hi");
+    						System.out.println(i + " " + j + " ." + squares[i][j].l +" " + squares[i][j].neighboors());
     					}
     				} else{
     					if(x.neighboors() == 3) {
     						changes[i][j] = true;
-    					System.out.println("Hello");
+    						System.out.println(i + " " + j + " ." + squares[i][j].l +" " + squares[i][j].neighboors());
     					}
     				}
     			}
     		}
-    		//Run Changes
-    		try{
-    			Thread.sleep(1000);
-    		} catch(InterruptedException i){}
+    		for(int i = 0; i < Window.size; i++) {
+    			for(int j = 0; j < Window.size; j++) {
+    				if(changes[i][j]) {
+    					squares[i][j].l = (squares[i][j].l ? false : true);
+    					changes[i][j] = false;
+    				}
+    			}
+    		}
     	}
     }
     
