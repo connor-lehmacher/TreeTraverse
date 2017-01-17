@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.math.BigInteger;
 
 import javax.swing.JFrame;
 
 import listening.KeyBoard;
 import listening.Mouse;
+import objects.Color1;
 import objects.Square;
 
 @SuppressWarnings("serial")
@@ -96,6 +96,7 @@ public class Window extends JFrame {
     		for(int j = 0; j < Window.size; j++) {
     			if(Math.random() > 0.3){
     				squares[i][j].l = true;
+    				squares[i][j].c = Color1.random();
     			}
     		}
     	}
@@ -161,8 +162,7 @@ public class Window extends JFrame {
     	g.setColor(Color.WHITE);
         for(int i = 0; i < Window.size; i++) {
         	for(int j = 0; j < Window.size; j++) {
-        		final double x = (double) Window.size;
-        		g.setColor(hueToColor((i+j)*360/x));
+        		g.setColor(squares[i][j].c.toColor());
         		if(squares[i][j].l) {
         			squares[i][j].draw(g, this);
         		}

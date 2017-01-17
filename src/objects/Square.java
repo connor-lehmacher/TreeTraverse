@@ -9,9 +9,11 @@ public class Square {
 	public int x;
 	public int y;
 	public boolean l;
+	public Color1 c;
 	
 	public Square() {
 		l = false;
+		c = Color1.Dead;
 		x = Window.sx;
 		y = Window.sy;
 		Window.squares[Window.sx][Window.sy] = this;
