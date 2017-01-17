@@ -26,7 +26,7 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 100;
+    public static int size = 800;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static int sx = 0;
@@ -79,11 +79,27 @@ public class Window extends JFrame {
         for(int i = 0; i < Window.size * Window.size; i++) {
         	new Square();
         }
-        squares[10][11].l = true;
-        squares[11][11].l = true;
-        squares[11][10].l = true;
-        squares[11][12].l = true;
-        squares[12][10].l = true;
+        /* infinite growth
+        squares[0][5].l = true;
+        squares[2][5].l = true;
+        squares[2][4].l = true;
+        squares[4][1].l = true;
+        squares[4][2].l = true;
+        squares[4][3].l = true;
+        squares[6][0].l = true;
+        squares[6][1].l = true;
+        squares[6][2].l = true;
+        squares[7][1].l = true;
+       */ 
+        
+    	for(int i = 0; i < Window.size; i++) {
+    		for(int j = 0; j < Window.size; j++) {
+    			if(Math.random() > 0.3){
+    				squares[i][j].l = true;
+    			}
+    		}
+    	}
+    	
     } 
    
     //-----Methods--------//
@@ -93,20 +109,18 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(100);
+    			Thread.sleep(1);
     		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
     				Square x = squares[i][j];
     				if(x.l){
-    					if(x.neighboors() != 2 && x.neighboors() != 3) {
+    					if(x.neighboors() != 2 && x.neighboors() != 3 ){
     						changes[i][j] = true;
-    						System.out.println(i + " " + j + " ." + squares[i][j].l +" " + squares[i][j].neighboors());
     					}
     				} else{
     					if(x.neighboors() == 3) {
     						changes[i][j] = true;
-    						System.out.println(i + " " + j + " ." + squares[i][j].l +" " + squares[i][j].neighboors());
     					}
     				}
     			}
@@ -147,7 +161,8 @@ public class Window extends JFrame {
     	g.setColor(Color.WHITE);
         for(int i = 0; i < Window.size; i++) {
         	for(int j = 0; j < Window.size; j++) {
-        		g.setColor(hueToColor(Math.sin((double)i/100.0)*j*3.600));
+        		final double x = (double) Window.size;
+        		g.setColor(hueToColor((i+j)*360/x));
         		if(squares[i][j].l) {
         			squares[i][j].draw(g, this);
         		}
