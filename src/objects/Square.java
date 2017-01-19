@@ -1,6 +1,5 @@
 package objects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -71,8 +70,8 @@ public class Square {
 			cs1.remove(Color1.Blue);
 			cs1.remove(Color1.Blue);
 			if(cs1.size() == 2) {
-				return Color1.Blue;
-			} else return Color1.Yellow;
+				return Color1.Green;
+			} else return Color1.Red;
 		}
 		if(cs.contains(Color1.Yellow) && !cs.contains(Color1.Green)) {
 			ArrayList<Color1> cs1 = (ArrayList<Color1>) cs.clone();
@@ -81,14 +80,14 @@ public class Square {
 			cs1.remove(Color1.Red);
 			cs1.remove(Color1.Red);
 			if(cs1.size() == 2) {
-				return Color1.Red;
-			} else return Color1.Green;
+				return Color1.Blue;
+			} else return Color1.Yellow;
 		}
 		if(cs.contains(Color1.Green) && !cs.contains(Color1.Blue)) {
-			return Color1.Blue;
+			return Color1.Green;
 		}
 		if(cs.contains(Color1.Blue) && !cs.contains(Color1.Red)) {
-			return Color1.Red;
+			return Color1.Blue;
 		}
 		System.out.println("Error");
 		return Color1.Blue;

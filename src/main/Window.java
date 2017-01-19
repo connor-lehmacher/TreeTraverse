@@ -29,6 +29,7 @@ public class Window extends JFrame {
     public static int size = 100;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
+    public static Color1[][] cchanges = new Color1[size][size];
     public static int sx = 0;
     public static int sy = 0;
     //Gives Values for padding based on OS
@@ -122,7 +123,7 @@ public class Window extends JFrame {
     				} else{
     					if(x.neighboors() == 3) {
     						changes[i][j] = true;
-    						x.c = x.neighboorcolor();
+    						cchanges[i][j] = x.neighboorcolor();
     					}
     				}
     			}
@@ -132,6 +133,10 @@ public class Window extends JFrame {
     				if(changes[i][j]) {
     					squares[i][j].l = (squares[i][j].l ? false : true);
     					changes[i][j] = false;
+    				}
+    				if(!(cchanges[i][j] == null)) {
+    					squares[i][j].c = cchanges[i][j];
+    					cchanges[i][j] = null;
     				}
     			}
     		}
