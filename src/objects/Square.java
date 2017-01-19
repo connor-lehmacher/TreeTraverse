@@ -1,6 +1,8 @@
 package objects;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import main.Window;
 
@@ -40,6 +42,56 @@ public class Square {
 		i+= (neighboor(0,-1).l ? 1 : 0);
 		i+= (neighboor(-1,0).l ? 1 : 0);
 		return i;
+	}
+	
+	@SuppressWarnings({"unchecked" })
+	public Color1 neighboorcolor() {
+		ArrayList<Color1> cs = new ArrayList<Color1>();
+		Square x;
+		x = neighboor(0,1);
+		if(x.l) cs.add(x.c);
+		x = neighboor(1,0);
+		if(x.l) cs.add(x.c);
+		x = neighboor(-1,1);
+		if(x.l) cs.add(x.c);
+		x = neighboor(1,-1);
+		if(x.l) cs.add(x.c);
+		x = neighboor(1,1);
+		if(x.l) cs.add(x.c);
+		x = neighboor(-1,-1);
+		if(x.l) cs.add(x.c);
+		x = neighboor(-1,0);
+		if(x.l) cs.add(x.c);
+		x = neighboor(0,-1);
+		if(x.l) cs.add(x.c);
+		if(cs.contains(Color1.Red) && !cs.contains(Color1.Yellow)) {
+			ArrayList<Color1> cs1 = (ArrayList<Color1>) cs.clone();
+			cs1.remove(Color1.Red);
+			cs1.remove(Color1.Red);
+			cs1.remove(Color1.Blue);
+			cs1.remove(Color1.Blue);
+			if(cs1.size() == 2) {
+				return Color1.Blue;
+			} else return Color1.Yellow;
+		}
+		if(cs.contains(Color1.Yellow) && !cs.contains(Color1.Green)) {
+			ArrayList<Color1> cs1 = (ArrayList<Color1>) cs.clone();
+			cs1.remove(Color1.Yellow);
+			cs1.remove(Color1.Yellow);
+			cs1.remove(Color1.Red);
+			cs1.remove(Color1.Red);
+			if(cs1.size() == 2) {
+				return Color1.Red;
+			} else return Color1.Green;
+		}
+		if(cs.contains(Color1.Green) && !cs.contains(Color1.Blue)) {
+			return Color1.Blue;
+		}
+		if(cs.contains(Color1.Blue) && !cs.contains(Color1.Red)) {
+			return Color1.Red;
+		}
+		System.out.println("Error");
+		return Color1.Blue;
 	}
 	
 	

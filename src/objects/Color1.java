@@ -3,7 +3,7 @@ package objects;
 import java.awt.Color;
 
 public enum Color1 {
-	Red(Color.red), Yellow, Green, Blue, Dead;
+	Red(Color.red), Yellow(Color.yellow), Green(Color.green), Blue(Color.blue), Dead(Color.white); 
 	
 	Color c;
 	
@@ -11,8 +11,8 @@ public enum Color1 {
 		this.c = c;
 	}
 	
-	public static Color toColor() {
-		return Color.red;
+	public Color toColor() {
+		return c;
 	}
 	public static Color1 random(){
 		double x= Math.random();

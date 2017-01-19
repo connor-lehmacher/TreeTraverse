@@ -26,7 +26,7 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 800;
+    public static int size = 100;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static int sx = 0;
@@ -94,7 +94,7 @@ public class Window extends JFrame {
         
     	for(int i = 0; i < Window.size; i++) {
     		for(int j = 0; j < Window.size; j++) {
-    			if(Math.random() > 0.3){
+    			if(Math.random() > 0.6){
     				squares[i][j].l = true;
     				squares[i][j].c = Color1.random();
     			}
@@ -110,7 +110,7 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(1);
+    			Thread.sleep(100);
     		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
@@ -122,6 +122,7 @@ public class Window extends JFrame {
     				} else{
     					if(x.neighboors() == 3) {
     						changes[i][j] = true;
+    						x.c = x.neighboorcolor();
     					}
     				}
     			}
