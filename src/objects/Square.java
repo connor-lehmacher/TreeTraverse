@@ -63,34 +63,44 @@ public class Square {
 		if(x.l) cs.add(x.c);
 		x = neighboor(0,-1);
 		if(x.l) cs.add(x.c);
-		if(cs.contains(Color1.Red) && !cs.contains(Color1.Yellow)) {
-			ArrayList<Color1> cs1 = (ArrayList<Color1>) cs.clone();
-			cs1.remove(Color1.Red);
-			cs1.remove(Color1.Red);
-			cs1.remove(Color1.Blue);
-			cs1.remove(Color1.Blue);
-			if(cs1.size() == 2) {
-				return Color1.Green;
-			} else return Color1.Red;
-		}
-		if(cs.contains(Color1.Yellow) && !cs.contains(Color1.Green)) {
-			ArrayList<Color1> cs1 = (ArrayList<Color1>) cs.clone();
-			cs1.remove(Color1.Yellow);
-			cs1.remove(Color1.Yellow);
-			cs1.remove(Color1.Red);
-			cs1.remove(Color1.Red);
-			if(cs1.size() == 2) {
-				return Color1.Blue;
-			} else return Color1.Yellow;
-		}
-		if(cs.contains(Color1.Green) && !cs.contains(Color1.Blue)) {
-			return Color1.Green;
-		}
-		if(cs.contains(Color1.Blue) && !cs.contains(Color1.Red)) {
+		int i = 0;
+		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Red)) {
 			return Color1.Blue;
 		}
+		if(cs.contains(Color1.Red) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
+			return Color1.Yellow;
+		}
+		if(cs.contains(Color1.Blue) && cs.contains(Color1.Red) && cs.contains(Color1.Yellow)) {
+			return Color1.Red;
+		}
+		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
+			return Color1.Green;
+		}
+		if(cs.contains(Color1.Yellow)){
+			for(Color1 c: cs) {
+				if( c == Color1.Yellow) i++;
+			}
+			if(i!=2) return Color1.Yellow;
+		}
+		if(cs.contains(Color1.Blue)){
+			i = 0;
+			for(Color1 c: cs) {
+				if( c == Color1.Blue) i++;
+			}
+			if(i!=2) return Color1.Blue;
+		}
+		if(cs.contains(Color1.Red)){
+			i = 0;
+			for(Color1 c: cs) {
+				if( c == Color1.Red) i++;
+			}
+			if(i!=2) return Color1.Red;
+		}
+		if(cs.contains(Color1.Green)){
+			return Color1.Green;
+		}
 		System.out.println("Error");
-		return Color1.Blue;
+		return Color1.Dead;
 	}
 	
 	

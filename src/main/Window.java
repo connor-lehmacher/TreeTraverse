@@ -111,7 +111,7 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(100);
+    			Thread.sleep(50);
     		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
