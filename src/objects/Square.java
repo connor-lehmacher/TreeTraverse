@@ -43,7 +43,7 @@ public class Square {
 		return i;
 	}
 	
-	@SuppressWarnings({"unchecked" })
+	@SuppressWarnings({ })
 	public Color1 neighboorcolor() {
 		ArrayList<Color1> cs = new ArrayList<Color1>();
 		Square x;
@@ -65,16 +65,16 @@ public class Square {
 		if(x.l) cs.add(x.c);
 		int i = 0;
 		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Red)) {
-			return Color1.Blue;
-		}
-		if(cs.contains(Color1.Red) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
 			return Color1.Yellow;
 		}
+		if(cs.contains(Color1.Red) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
+			return Color1.Blue;
+		}
 		if(cs.contains(Color1.Blue) && cs.contains(Color1.Red) && cs.contains(Color1.Yellow)) {
-			return Color1.Red;
+			return Color1.Green;
 		}
 		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
-			return Color1.Green;
+			return Color1.Red;
 		}
 		if(cs.contains(Color1.Yellow)){
 			for(Color1 c: cs) {
@@ -99,7 +99,7 @@ public class Square {
 		if(cs.contains(Color1.Green)){
 			return Color1.Green;
 		}
-		System.out.println("Error");
+		//System.out.println("Error");
 		return Color1.Dead;
 	}
 	

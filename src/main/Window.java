@@ -16,9 +16,9 @@ import objects.Square;
 public class Window extends JFrame {
 	//-------------Fields--------------//
     /** Initial Size of the frame: X */
-    final static int FRAME_X = 800;
+    final static int FRAME_X = 850;
     /** Initial Size of the frame: Y */
-    final static int FRAME_Y = 800;
+    final static int FRAME_Y = 850;
     /** Padding for window size: X
      * ElCapitan: 0, Windows7: 8  */   
     public final static int PADDING_X;
@@ -26,7 +26,7 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 100;
+    public static int size = 400;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static Color1[][] cchanges = new Color1[size][size];
@@ -121,7 +121,7 @@ public class Window extends JFrame {
     						changes[i][j] = true;
     					}
     				} else{
-    					if(x.neighboors() == 3) {
+    					if(x.neighboors() == 3 || x.neighboors() == 3) {
     						changes[i][j] = true;
     						cchanges[i][j] = x.neighboorcolor();
     					}
