@@ -2,6 +2,7 @@ package objects;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import main.Window;
 
@@ -10,11 +11,12 @@ public class Square {
 	public int x;
 	public int y;
 	public boolean l;
-	public Color1 c;
+	/** -1 should be white, 0-360 corresponds to a hue value -2 is an unassigned value */
+	public int c;
 	
 	public Square() {
 		l = false;
-		c = Color1.Dead;
+		c = -1;
 		x = Window.sx;
 		y = Window.sy;
 		Window.squares[Window.sx][Window.sy] = this;
@@ -44,8 +46,8 @@ public class Square {
 	}
 	
 	@SuppressWarnings({ })
-	public Color1 neighboorcolor() {
-		ArrayList<Color1> cs = new ArrayList<Color1>();
+	public int neighboorcolor() {
+		ArrayList<Integer> cs = new ArrayList<Integer>();
 		Square x;
 		x = neighboor(0,1);
 		if(x.l) cs.add(x.c);
@@ -63,44 +65,22 @@ public class Square {
 		if(x.l) cs.add(x.c);
 		x = neighboor(0,-1);
 		if(x.l) cs.add(x.c);
+		if(cs.contains(-1) || cs.contains(-2)) {
+			return -1;
+		}
+		Collections.sort(cs);
 		int i = 0;
-		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Red)) {
-			return Color1.Yellow;
+		if(cs.get(1) - cs.get(0) >= 150) {
+			cs.set(0, cs.get(0) + 360);
 		}
-		if(cs.contains(Color1.Red) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
-			return Color1.Blue;
+		if(cs.get(2) - cs.get(1) >= 150) {
+			cs.set(0, cs.get(0) + 360);
+			cs.set(1, cs.get(1) + 360);
 		}
-		if(cs.contains(Color1.Blue) && cs.contains(Color1.Red) && cs.contains(Color1.Yellow)) {
-			return Color1.Green;
+		for(int a : cs) {
+			i += a;
 		}
-		if(cs.contains(Color1.Blue) && cs.contains(Color1.Green) && cs.contains(Color1.Yellow)) {
-			return Color1.Red;
-		}
-		if(cs.contains(Color1.Yellow)){
-			for(Color1 c: cs) {
-				if( c == Color1.Yellow) i++;
-			}
-			if(i!=2) return Color1.Yellow;
-		}
-		if(cs.contains(Color1.Blue)){
-			i = 0;
-			for(Color1 c: cs) {
-				if( c == Color1.Blue) i++;
-			}
-			if(i!=2) return Color1.Blue;
-		}
-		if(cs.contains(Color1.Red)){
-			i = 0;
-			for(Color1 c: cs) {
-				if( c == Color1.Red) i++;
-			}
-			if(i!=2) return Color1.Red;
-		}
-		if(cs.contains(Color1.Green)){
-			return Color1.Green;
-		}
-		//System.out.println("Error");
-		return Color1.Dead;
+		return ((i + 1) /3) % 360;
 	}
 	
 	

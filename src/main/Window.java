@@ -9,16 +9,15 @@ import javax.swing.JFrame;
 
 import listening.KeyBoard;
 import listening.Mouse;
-import objects.Color1;
 import objects.Square;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame {
 	//-------------Fields--------------//
     /** Initial Size of the frame: X */
-    final static int FRAME_X = 850;
+    final static int FRAME_X = 820;
     /** Initial Size of the frame: Y */
-    final static int FRAME_Y = 850;
+    final static int FRAME_Y = 820;
     /** Padding for window size: X
      * ElCapitan: 0, Windows7: 8  */   
     public final static int PADDING_X;
@@ -26,10 +25,17 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 400;
+    public static int size = 200;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
-    public static Color1[][] cchanges = new Color1[size][size];
+    public static int[][] cchanges = new int[size][size];
+    static {
+    	for(int i = 0; i < size ; i++) {
+    		for(int j = 0; j< size ; j++) {
+    			cchanges[i][j] = -2;
+    		}
+    	}
+    }
     public static int sx = 0;
     public static int sy = 0;
     //Gives Values for padding based on OS
@@ -97,7 +103,7 @@ public class Window extends JFrame {
     		for(int j = 0; j < Window.size; j++) {
     			if(Math.random() > 0.6){
     				squares[i][j].l = true;
-    				squares[i][j].c = Color1.random();
+    				squares[i][j].c = (int)(Math.random() * 360); 
     			}
     		}
     	}
@@ -111,7 +117,7 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(50);
+    			Thread.sleep(40);
     		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
@@ -134,9 +140,9 @@ public class Window extends JFrame {
     					squares[i][j].l = (squares[i][j].l ? false : true);
     					changes[i][j] = false;
     				}
-    				if(!(cchanges[i][j] == null)) {
+    				if(!(cchanges[i][j] == -2)) {
     					squares[i][j].c = cchanges[i][j];
-    					cchanges[i][j] = null;
+    					cchanges[i][j] = -2; 
     				}
     			}
     		}
@@ -168,7 +174,14 @@ public class Window extends JFrame {
     	g.setColor(Color.WHITE);
         for(int i = 0; i < Window.size; i++) {
         	for(int j = 0; j < Window.size; j++) {
-        		g.setColor(squares[i][j].c.toColor());
+        		final int c1 = squares[i][j].c;
+        		if(c1 == -1) {
+        			g.setColor(Color.WHITE);
+        		} else if(c1 == -2) {
+        			System.err.println("Ouch");
+        		} else { 
+        			g.setColor(hueToColor((double)c1));
+        		}
         		if(squares[i][j].l) {
         			squares[i][j].draw(g, this);
         		}

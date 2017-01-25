@@ -3,12 +3,14 @@ package objects;
 import java.awt.Color;
 
 public enum Color1 {
-	Red(Color.red), Yellow(Color.yellow), Green(Color.green), Blue(Color.blue), Dead(Color.white); 
+	Red(Color.red, 0), Yellow(Color.yellow, 90), Green(Color.green, 180), Blue(Color.blue, 270), Dead(Color.white, -1); 
 	
 	Color c;
+	int ci;
 	
-	private Color1(Color c){
+	private Color1(Color c, int ci){
 		this.c = c;
+		this.ci = ci;
 	}
 	
 	public Color toColor() {
@@ -28,5 +30,8 @@ public enum Color1 {
 		else{
 			return Blue;
 		}
+	}
+	public int toInt() {
+		return ci;
 	}
 }
