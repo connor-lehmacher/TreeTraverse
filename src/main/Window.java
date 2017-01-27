@@ -117,7 +117,7 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(40);
+    			Thread.sleep(0);
     		} catch(InterruptedException i){}
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
@@ -180,7 +180,7 @@ public class Window extends JFrame {
         		} else if(c1 == -2) {
         			System.err.println("Ouch");
         		} else { 
-        			g.setColor(hueToColor((double)c1));
+        			g.setColor(hueToColor(messWithHue((double)c1)));
         		}
         		if(squares[i][j].l) {
         			squares[i][j].draw(g, this);
@@ -188,6 +188,15 @@ public class Window extends JFrame {
         	}
         }
         repaint();
+    }
+    
+    public double messWithHue(double hue) {
+    	double x = -0.00000006 * hue * hue * hue * hue
+    			+ 0.00003403 * hue * hue * hue
+    			- 0.00195823 * hue * hue
+    			+ 0.30683021 * hue
+    			+ 0.7900432;
+    	return x;
     }
     
     public Color hueToColor(double hue) {

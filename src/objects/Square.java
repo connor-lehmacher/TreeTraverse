@@ -70,10 +70,11 @@ public class Square {
 		}
 		Collections.sort(cs);
 		int i = 0;
-		if(cs.get(1) - cs.get(0) >= 150) {
+		int tolerance = 160;
+		if(cs.get(1) - cs.get(0) >= tolerance + 10) {
 			cs.set(0, cs.get(0) + 360);
 		}
-		if(cs.get(2) - cs.get(1) >= 150) {
+		if(cs.get(2) - cs.get(1) >= tolerance) {
 			cs.set(0, cs.get(0) + 360);
 			cs.set(1, cs.get(1) + 360);
 		}
