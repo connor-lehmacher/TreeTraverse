@@ -15,9 +15,9 @@ import objects.Square;
 public class Window extends JFrame {
 	//-------------Fields--------------//
     /** Initial Size of the frame: X */
-    final static int FRAME_X = 820;
+    final static int FRAME_X = 817;
     /** Initial Size of the frame: Y */
-    final static int FRAME_Y = 820;
+    final static int FRAME_Y = 817;
     /** Padding for window size: X
      * ElCapitan: 0, Windows7: 8  */   
     public final static int PADDING_X;
@@ -86,22 +86,18 @@ public class Window extends JFrame {
         for(int i = 0; i < Window.size * Window.size; i++) {
         	new Square();
         }
-        /* infinite growth
-        squares[0][5].l = true;
-        squares[2][5].l = true;
-        squares[2][4].l = true;
-        squares[4][1].l = true;
-        squares[4][2].l = true;
-        squares[4][3].l = true;
-        squares[6][0].l = true;
-        squares[6][1].l = true;
-        squares[6][2].l = true;
-        squares[7][1].l = true;
-       */ 
+       
+       /* squares[400][400].l = true;
+        squares[401][401].l = true;
+        squares[402][401].l = true;
+        squares[403][401].l = true;
+        squares[403][402].l = true;
+        squares[403][403].l = true; */
+        
         
     	for(int i = 0; i < Window.size; i++) {
     		for(int j = 0; j < Window.size; j++) {
-    			if(Math.random() > 0.6){
+    			if( Math.random() > 0.07 /*squares[i][j].l*/){
     				squares[i][j].l = true;
     				squares[i][j].c = (int)(Math.random() * 360); 
     			}
@@ -123,7 +119,7 @@ public class Window extends JFrame {
     			for(int j = 0; j < Window.size; j++) {
     				Square x = squares[i][j];
     				if(x.l){
-    					if(x.neighboors() != 2 && x.neighboors() != 3 ){
+    					if(x.neighboors() ==1 || x.neighboors() > 4){
     						changes[i][j] = true;
     					}
     				} else{
