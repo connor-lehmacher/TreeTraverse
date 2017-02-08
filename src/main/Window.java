@@ -25,7 +25,7 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 200;
+    public static int size = 800;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static int[][] cchanges = new int[size][size];
@@ -194,7 +194,7 @@ public class Window extends JFrame {
     	double x = -0.00000006 * hue * hue * hue * hue
     			+ 0.00003403 * hue * hue * hue
     			- 0.00195823 * hue * hue
-    			+ 0.30683021 * hue
+    			+ 0.30683021 * hue  
     			+ 0.7900432;
     	return x;
     }
