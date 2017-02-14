@@ -15,9 +15,9 @@ import objects.Square;
 public class Window extends JFrame {
 	//-------------Fields--------------//
     /** Initial Size of the frame: X */
-    final static int FRAME_X = 817;
+    final static int FRAME_X = 745;
     /** Initial Size of the frame: Y */
-    final static int FRAME_Y = 817;
+    final static int FRAME_Y = 745;
     /** Padding for window size: X
      * ElCapitan: 0, Windows7: 8  */   
     public final static int PADDING_X;
@@ -25,7 +25,7 @@ public class Window extends JFrame {
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
     
-    public static int size = 800;
+    public static int size = 729;
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static int[][] cchanges = new int[size][size];
@@ -87,26 +87,52 @@ public class Window extends JFrame {
         	new Square();
         }
        
-       /* squares[400][400].l = true;
-        squares[401][401].l = true;
-        squares[402][401].l = true;
-        squares[403][401].l = true;
-        squares[403][402].l = true;
-        squares[403][403].l = true; */
-        
+        /*squares[400][400].l = true;
+        squares[399][400].l = true;
+        squares[400][401].l = true;
+        squares[401][400].l = true;
+        squares[400][399].l = true;
+        squares[401][402].l = true; 
+        squares[399][402].l = true; 
+        squares[401][398].l = true; 
+        squares[399][398].l = true; 
+        */ 
         
     	for(int i = 0; i < Window.size; i++) {
     		for(int j = 0; j < Window.size; j++) {
-    			if( Math.random() > 0.07 /*squares[i][j].l*/){
+    			if(true /* Math.random() > 0.9 squares[i][j].l*/){
     				squares[i][j].l = true;
     				squares[i][j].c = (int)(Math.random() * 360); 
     			}
     		}
     	}
-    	
+    	holes(729, squares, 0, 0, 50);
     } 
    
     //-----Methods--------//
+    public void holes(int a, Square[][] b, int c, int d, int e) {
+    	if(a == 3) {
+    		b[c + 1][d + 1].l = false;
+    	}
+    	else {
+    		for(int i = a/3 + c; i < 2*a/3 + c; i++) {
+    			for(int j = a/3 + d; j < 2*a/3 + d; j++) {
+    				b[i][j].l = false;
+    			}
+    		}
+    		if(e > 1) {
+    		holes(a/3, b, c, d, e-1);
+    		holes(a/3, b, c + a/3, d, e-1);
+    		holes(a/3, b, c + 2*a/3, d, e-1);
+    		holes(a/3, b, c, d + a/3, e-1);
+    		holes(a/3, b, c, d + 2*a/3, e-1);
+    		holes(a/3, b, c +a/3, d+a/3, e-1);
+    		holes(a/3, b, c + 2*a/3, d +2*a/3, e-1);
+    		holes(a/3, b, c + 2*a/3, d +a/3, e-1);
+    		holes(a/3, b, c + a/3, d +2*a/3, e-1);
+    		}
+    	}
+    }
     /** Logic loop */
     public void run() {
     	while(true) {
@@ -115,11 +141,12 @@ public class Window extends JFrame {
     		try{
     			Thread.sleep(0);
     		} catch(InterruptedException i){}
+    		/*
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
     				Square x = squares[i][j];
     				if(x.l){
-    					if(x.neighboors() ==1 || x.neighboors() > 4){
+    					if(x.neighboors() == 8 || x.neighboors() > 3){
     						changes[i][j] = true;
     					}
     				} else{
@@ -142,6 +169,7 @@ public class Window extends JFrame {
     				}
     			}
     		}
+    		*/
     	}
     }
     
