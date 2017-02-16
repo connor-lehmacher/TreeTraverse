@@ -15,9 +15,9 @@ import objects.Square;
 public class Window extends JFrame {
 	//-------------Fields--------------//
     /** Initial Size of the frame: X */
-    final static int FRAME_X = 745;
+    final static int FRAME_X;
     /** Initial Size of the frame: Y */
-    final static int FRAME_Y = 745;
+    final static int FRAME_Y;
     /** Padding for window size: X
      * ElCapitan: 0, Windows7: 8  */   
     public final static int PADDING_X;
@@ -43,15 +43,22 @@ public class Window extends JFrame {
     	if (System.getProperty("os.name").equals("Mac OS X")) {
     		PADDING_X = 0;
     		PADDING_Y = 23;
+    		FRAME_X = size;
+    		FRAME_Y = size;
+    		
     	}
     	else if (System.getProperty("os.name").equals("Windows 7")) {
     		PADDING_X = 8;
     		PADDING_Y = 30;
+    		FRAME_X = size + 16;
+    		FRAME_Y = size + 37;
     	}
     	else {
     		System.err.println("OS Not Supported Yet");
     		PADDING_X = 0;
     		PADDING_Y = 0;
+    		FRAME_X = size;
+    		FRAME_Y = size;
     	}
     }
     
@@ -106,7 +113,8 @@ public class Window extends JFrame {
     			}
     		}
     	}
-    	holes(729, squares, 0, 0, 50);
+//        squares[0][0].l = false; 
+    	holes(size, squares, 0, 0, 4);
     } 
    
     //-----Methods--------//
@@ -139,14 +147,14 @@ public class Window extends JFrame {
             keysPressed = k.getKeysPressed();
     		mousePressed = m.getMousePressed();
     		try{
-    			Thread.sleep(0);
+    			Thread.sleep(10);
     		} catch(InterruptedException i){}
-    		/*
+
     		for(int i = 0; i < Window.size; i++) {
     			for(int j = 0; j < Window.size; j++) {
     				Square x = squares[i][j];
     				if(x.l){
-    					if(x.neighboors() == 8 || x.neighboors() > 3){
+    					if(x.neighboors() < 2 || x.neighboors() > 3){
     						changes[i][j] = true;
     					}
     				} else{
@@ -169,7 +177,7 @@ public class Window extends JFrame {
     				}
     			}
     		}
-    		*/
+
     	}
     }
     
