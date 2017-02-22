@@ -24,8 +24,21 @@ public class Window extends JFrame {
     /** Padding for window size: Y
      * ElCapitan: 23, Windows7: 30  */ 
     public final static int PADDING_Y;
+
+    //Double Buffering
+    private Image photo;
+    private Graphics dbg;
     
-    public static int size = 729;
+    int frameX;
+    int frameY;
+   
+    Mouse m;
+    boolean mousePressed;
+    KeyBoard k;
+    ArrayList<Boolean> keysPressed = new ArrayList<Boolean>();
+    
+    public static int size = 770;
+
     public static Square[][] squares = new Square[size][size];
     public static boolean[][] changes = new boolean[size][size];
     public static int[][] cchanges = new int[size][size];
@@ -61,18 +74,8 @@ public class Window extends JFrame {
     		FRAME_Y = size;
     	}
     }
-    
-    //Double Buffering
-    private Image photo;
-    private Graphics dbg;
-    
-    int frameX;
-    int frameY;
-   
-    Mouse m;
-    boolean mousePressed;
-    KeyBoard k;
-    ArrayList<Boolean> keysPressed = new ArrayList<Boolean>();
+
+    private static boolean rules = true;
 
     //----------Constructor--------//
     /** Makes Frame Makes objects */
@@ -107,37 +110,34 @@ public class Window extends JFrame {
         
     	for(int i = 0; i < Window.size; i++) {
     		for(int j = 0; j < Window.size; j++) {
-    			if(true /* Math.random() > 0.9 squares[i][j].l*/){
+    			if((i - j) % 7 == 0 ||(i * j + 2) % 5 == 0 ||(i + j + 3) % 11 == 0/* Math.random() > 0.9 squares[i][j].l*/){
     				squares[i][j].l = true;
     				squares[i][j].c = (int)(Math.random() * 360); 
     			}
     		}
     	}
 //        squares[0][0].l = false; 
-    	holes(size, squares, 0, 0, 4);
+//    	holes(size, squares, 0, 0, 3);
     } 
    
     //-----Methods--------//
     public void holes(int a, Square[][] b, int c, int d, int e) {
-    	if(a == 3) {
-    		b[c + 1][d + 1].l = false;
-    	}
-    	else {
-    		for(int i = a/3 + c; i < 2*a/3 + c; i++) {
-    			for(int j = a/3 + d; j < 2*a/3 + d; j++) {
-    				b[i][j].l = false;
-    			}
-    		}
-    		if(e > 1) {
+    	if(e > 0) {
+    		holes(a/3, b, c + a/3, d + a/3, e-1);
     		holes(a/3, b, c, d, e-1);
-    		holes(a/3, b, c + a/3, d, e-1);
+    		kill(a/3, b, c + a/3, d, e-1);
     		holes(a/3, b, c + 2*a/3, d, e-1);
-    		holes(a/3, b, c, d + a/3, e-1);
+    		kill(a/3, b, c, d + a/3, e-1);
     		holes(a/3, b, c, d + 2*a/3, e-1);
-    		holes(a/3, b, c +a/3, d+a/3, e-1);
     		holes(a/3, b, c + 2*a/3, d +2*a/3, e-1);
-    		holes(a/3, b, c + 2*a/3, d +a/3, e-1);
-    		holes(a/3, b, c + a/3, d +2*a/3, e-1);
+    		kill(a/3, b, c + 2*a/3, d +a/3, e-1);
+    		kill(a/3, b, c + a/3, d +2*a/3, e-1);
+    	}
+    }
+    public void kill(int a, Square[][] b, int c, int d, int e) {
+    	for(int i = c; i < a + c; i++) {
+    		for(int j = d; j < a + d; j++) {
+    			b[i][j].l = false;
     		}
     	}
     }
@@ -149,35 +149,35 @@ public class Window extends JFrame {
     		try{
     			Thread.sleep(10);
     		} catch(InterruptedException i){}
-
-    		for(int i = 0; i < Window.size; i++) {
-    			for(int j = 0; j < Window.size; j++) {
-    				Square x = squares[i][j];
-    				if(x.l){
-    					if(x.neighboors() < 2 || x.neighboors() > 3){
-    						changes[i][j] = true;
+    		if(rules) {
+    			for(int i = 0; i < Window.size; i++) {
+	    			for(int j = 0; j < Window.size; j++) {
+	    				Square x = squares[i][j];
+   		 				if(x.l){
+   		 					if(x.neighboors() < 2 || x.neighboors() > 3){
+   		 						changes[i][j] = true;
+   		 					}
+   		 				} else{
+   		 					if(x.neighboors() == 3 || x.neighboors() == 3) {
+   		 						changes[i][j] = true;
+   		 						cchanges[i][j] = x.neighboorcolor();
+    						}
     					}
-    				} else{
-    					if(x.neighboors() == 3 || x.neighboors() == 3) {
-    						changes[i][j] = true;
-    						cchanges[i][j] = x.neighboorcolor();
+    				}
+    			}
+    			for(int i = 0; i < Window.size; i++) {
+    				for(int j = 0; j < Window.size; j++) {
+    					if(changes[i][j]) {
+    						squares[i][j].l = (squares[i][j].l ? false : true);
+    						changes[i][j] = false;
+    					}
+    					if(!(cchanges[i][j] == -2)) {
+  		 					squares[i][j].c = cchanges[i][j];
+    						cchanges[i][j] = -2; 
     					}
     				}
     			}
     		}
-    		for(int i = 0; i < Window.size; i++) {
-    			for(int j = 0; j < Window.size; j++) {
-    				if(changes[i][j]) {
-    					squares[i][j].l = (squares[i][j].l ? false : true);
-    					changes[i][j] = false;
-    				}
-    				if(!(cchanges[i][j] == -2)) {
-    					squares[i][j].c = cchanges[i][j];
-    					cchanges[i][j] = -2; 
-    				}
-    			}
-    		}
-
     	}
     }
     
